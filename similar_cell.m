@@ -1,0 +1,116 @@
+function sim_idx = similar_cell(X)
+
+% Find the 25 most similar cell for each cell.
+
+[n,d] = size(X);
+
+sim_idx1 = zeros(1,n);
+sim_idx2 = zeros(1,n);
+sim_idx3 = zeros(1,n);
+sim_idx4 = zeros(1,n);
+sim_idx5 = zeros(1,n);
+sim_idx6 = zeros(1,n);
+sim_idx7 = zeros(1,n);
+sim_idx8 = zeros(1,n);
+sim_idx9 = zeros(1,n);
+sim_idx10 = zeros(1,n);
+sim_idx11 = zeros(1,n);
+sim_idx12 = zeros(1,n);
+sim_idx13 = zeros(1,n);
+sim_idx14 = zeros(1,n);
+sim_idx15 = zeros(1,n);
+sim_idx16 = zeros(1,n);
+sim_idx17 = zeros(1,n);
+sim_idx18 = zeros(1,n);
+sim_idx19 = zeros(1,n);
+sim_idx20 = zeros(1,n);
+sim_idx21 = zeros(1,n);
+sim_idx22 = zeros(1,n);
+sim_idx23 = zeros(1,n);
+sim_idx24 = zeros(1,n);
+sim_idx25 = zeros(1,n);
+
+parfor ii = 1: n
+  FPN = d*ones(1,n);
+  for i = 1:n
+    FPN(i) = sum(xor(X(ii,:),X(i,:)));                
+  end
+  FPN(ii) = d;
+  [~,sim_idx1(ii)] = min(FPN);
+  FPN(sim_idx1(ii)) = d;
+  [~,sim_idx2(ii)] = min(FPN);
+  FPN(sim_idx2(ii)) = d;
+  [~,sim_idx3(ii)] = min(FPN);
+  FPN(sim_idx3(ii)) = d;
+  [~,sim_idx4(ii)] = min(FPN);
+  FPN(sim_idx4(ii)) = d;
+  [~,sim_idx5(ii)] = min(FPN);
+  FPN(sim_idx5(ii)) = d;
+  [~,sim_idx6(ii)] = min(FPN);
+  FPN(sim_idx6(ii)) = d;
+  [~,sim_idx7(ii)] = min(FPN);
+  FPN(sim_idx7(ii)) = d;
+  [~,sim_idx8(ii)] = min(FPN);
+  FPN(sim_idx8(ii)) = d;
+  [~,sim_idx9(ii)] = min(FPN);
+  FPN(sim_idx9(ii)) = d;
+  [~,sim_idx10(ii)] = min(FPN);
+  FPN(sim_idx10(ii)) = d;
+  [~,sim_idx11(ii)] = min(FPN);
+  FPN(sim_idx11(ii)) = d;
+  [~,sim_idx12(ii)] = min(FPN);
+  FPN(sim_idx12(ii)) = d;
+  [~,sim_idx13(ii)] = min(FPN);
+  FPN(sim_idx13(ii)) = d;
+  [~,sim_idx14(ii)] = min(FPN);
+  FPN(sim_idx14(ii)) = d;
+  [~,sim_idx15(ii)] = min(FPN);
+  FPN(sim_idx15(ii)) = d;
+  [~,sim_idx16(ii)] = min(FPN);
+  FPN(sim_idx16(ii)) = d;
+  [~,sim_idx17(ii)] = min(FPN);
+  FPN(sim_idx17(ii)) = d;
+  [~,sim_idx18(ii)] = min(FPN);
+  FPN(sim_idx18(ii)) = d;
+  [~,sim_idx19(ii)] = min(FPN);
+  FPN(sim_idx19(ii)) = d;
+  [~,sim_idx20(ii)] = min(FPN);
+  FPN(sim_idx20(ii)) = d;
+  [~,sim_idx21(ii)] = min(FPN);
+  FPN(sim_idx21(ii)) = d;
+  [~,sim_idx22(ii)] = min(FPN);
+  FPN(sim_idx22(ii)) = d;
+  [~,sim_idx23(ii)] = min(FPN);
+  FPN(sim_idx23(ii)) = d;
+  [~,sim_idx24(ii)] = min(FPN);
+  FPN(sim_idx24(ii)) = d;
+  [~,sim_idx25(ii)] = min(FPN);
+end
+delete(gcp('nocreate'))
+
+sim_idx{1} = sim_idx1;
+sim_idx{2} = sim_idx2;
+sim_idx{3} = sim_idx3;
+sim_idx{4} = sim_idx4;
+sim_idx{5} = sim_idx5;
+sim_idx{6} = sim_idx6;
+sim_idx{7} = sim_idx7;
+sim_idx{8} = sim_idx8;
+sim_idx{9} = sim_idx9;
+sim_idx{10} = sim_idx10;
+sim_idx{11} = sim_idx11;
+sim_idx{12} = sim_idx12;
+sim_idx{13} = sim_idx13;
+sim_idx{14} = sim_idx14;
+sim_idx{15} = sim_idx15;
+sim_idx{16} = sim_idx16;
+sim_idx{17} = sim_idx17;
+sim_idx{18} = sim_idx18;
+sim_idx{19} = sim_idx19;
+sim_idx{20} = sim_idx20;
+sim_idx{21} = sim_idx21;
+sim_idx{22} = sim_idx22;
+sim_idx{23} = sim_idx23;
+sim_idx{24} = sim_idx24;
+sim_idx{25} = sim_idx25;
+  
