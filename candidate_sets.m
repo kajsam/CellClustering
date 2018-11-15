@@ -21,7 +21,7 @@ Zsets = cell(1,nZ);
 for k =  1: nZ   
   w = Z(:,k);                           % for each column
   set = [];                             % create a set
-  for r = 1 : 10                       % maximum size of the set
+  for r = 1 : 50                       % maximum size of the set
     w_or_set = logical(sum([w Z(:,set)],2));     % row sum of the set       
     
     pen = ones(1,nZ)*n;                 % penalties
@@ -64,8 +64,8 @@ for k =  1: nZ
     else
       set = [set idx];                  % add to set
     end
-    if r == 10
-      disp('r = 10!')
+    if r == 50
+      disp('r = 50!')
       return
     end
   end
