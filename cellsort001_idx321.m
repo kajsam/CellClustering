@@ -1,18 +1,15 @@
-function [X, Zet, A] = cellsort001_idx1(X, Zet, A)
+function [X, Zet, A] = cellsort001_idx321(X, Zet, A)
 
 % Sort by cell class
 % figure, imagesc(Zet), title('Before')
 
-figure, imagesc(Zet), title('Before')
-
-merg = [2 3];
+merg = [1 2];
 mZet = Zet(:,merg);
-mZet(1:250,:) = false;
-mZet(871:end,:) = false;
-figure, imagesc(mZet), title('Sort these')
+mZet(1:871,:) = false;
+% figure, imagesc(mZet), title('Sort these')
 Xmov = X(logical(sum(mZet,2)),:);
 [nmov,d] = size(Xmov);
-pause
+
 Xmov(1:sum(mZet(:,1)),:) = X(mZet(:,1),:);
 Xmov(sum(mZet(:,1))+1:nmov,:) = X(mZet(:,2),:);
 X(logical(sum(mZet,2)),:) = Xmov;
@@ -26,7 +23,7 @@ Zmov = Zet(logical(sum(mZet,2)),:);
 Zmov(1:sum(mZet(:,1)),:) = Zet(mZet(:,1),:);
 Zmov(sum(mZet(:,1))+1:nmov,:) = Zet(mZet(:,2),:);
 Zet(logical(sum(mZet,2)),:) = Zmov;
-Zet = Zet(:,[1 3 2 4]);
+Zet = Zet(:,[2 1 3 4]);
 
-figure, imagesc(Zet), title('After')
+% figure, imagesc(Zet), title('After')
 
