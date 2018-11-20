@@ -107,13 +107,18 @@ if isempty(Zclust)
   p = sum(Pset,2);
   [~, idx] = min(p)
   
-  for idx = 29
-      Zet = Zsets{idx};
-  figure(fig_nr), imagesc(Zet), title(idx)
-  pause
+  for idx = 1
+    idx = 1
+    Zet = Zsets{idx};
   end
- 
+  % Zet = Zclust;
   [A,~,h] = fisher_set(X,Zet,fig_nr+1);
+  
+  figure(fig_nr), imagesc(Zet), xlabel(idx),
+  ylabel(sum(h))
+  title('Before maximum log likelihood')
+  drawnow
+  
   Ar = A; 
   maxR = 50
   Zloglik = Zet;
@@ -124,19 +129,19 @@ if isempty(Zclust)
     fig_nr = fig_nr+1;
   
     Zet = relabel_likelihood(X, Ar, Zet, 0); %
-    
-    figure(fig_nr), imagesc(Zet), colormap(gray)
-    title('Maximum likelihood set'), xlabel(r), drawnow
-    
     [Ar,Psetr,h] = fisher_set(X,Zet,0);
+    
+    figure(fig_nr), imagesc(Zet)
+    title('Maximum likelihood set'), xlabel(r), 
+    ylabel(sum(h))
+    drawnow
     % figure(fig_nr+2), imagesc(Ar), colormap(gray)
     % title('Fisher matrix'), drawnow
     
     if isequal(Zloglik,Zet) || (r == maxR)
-        r
-        sum(h)
-        [sort_idx, Zet] = sort_and_display(X, Zet, Ar, Psetr, fig_nr);
-        Zclust = Zet;
+      [r sum(h)]   
+      % [sort_idx, Zet] = sort_and_display(X, Zet, Ar, Psetr, fig_nr);
+      Zclust = Zet;
       return
     else
       Zloglik = Zet;
@@ -144,18 +149,9 @@ if isempty(Zclust)
   end
 end
 
-% if isempty(sort_idx)
-
-[sX, Zet, sAr] = cellsort001_idx29(X, Zclust, Ar);
+[sX, Zet, sAr] = cellsort001_idx1(X, Zclust, Ar);
 
 [sort_idx, Zet, ticks, ticklabels] = sort_and_display(sX, Zet, sAr, Psetr, fig_nr);
-
-%   return
-%end
-
-
-X = X(:,sort_idx);
-sAr = Ar(:,sort_idx);
 
 
 
