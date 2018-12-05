@@ -12,13 +12,14 @@ K = size(Zet,2);
 % [~,idx] = sort(sum(Zet),'descend');
 % Zet = Zet(:,idx);
 
-figure(fig_nr), imagesc(Zet), colormap(gray), title('Log likelihood cell clusters')
-figure(fig_nr+1), imagesc(A), colormap(gray), title('Log likelihood Fisher matrix')
-
 id = zeros(1,K);
 for k = 1: K
   id(k) = find(Zet(:,k),1);
 end
+
+% figure, imagesc(Zet)
+% figure, imagesc(A)
+
 
 % Number of possible gene classes and their names
 name_gene_class = cell(1);
@@ -61,7 +62,8 @@ end
 [C,~,ic] = unique(class);
 setdiff(1:t,C)
 a_counts = accumarray(ic,1);
-[C', a_counts]
+
+T = table(a_counts,'RowNames',name_gene_class(C))
 
 idx_c = cell(1,t);
 for c = 1: t
@@ -78,6 +80,12 @@ idx = cell2mat(idx_c);
 sX = X(:,idx);
 sA = A(:,idx);
 
+figure(fig_nr), imagesc(Zet), title('Sorted cell clusters')
+figure(fig_nr+1), imagesc(sA), title('Log likelihood Fisher matrix')
+
+
+
+
 figure(fig_nr+2), imagesc(sX), colormap(gray)
 ticks = cumsum([1; a_counts(1:end-1)]);
 xticks(ticks)
@@ -86,19 +94,23 @@ xticklabels(ticklabels)
 xtickangle(90)
 
 col = [0.25 0.4 0.7 0.9];
-rep = 100;
-imZclust = [col(1)*repmat(Zet(:,1), 1,rep) col(2)*repmat(Zet(:,2), 1,rep) ...
-            col(3)*repmat(Zet(:,3), 1,rep) col(4)*repmat(Zet(:,4), 1,rep)];
+rep = 200;
+imZclust = zeros(n,1);
+imZclust(Zet(:,1)) = col(1);
+imZclust(Zet(:,2)) = col(2);
+imZclust(Zet(:,3)) = col(3);
+imZclust(Zet(:,4)) = col(4);
 
+imZclust = repmat(imZclust, 1,rep);
         
-rowA = unique(sA,'rows','stable'); % Finding replicates. 
-rowA = rowA([1 2 3 4],:);
-figure(27), imagesc(rowA), colormap(gray), title('Fisher unique')
+rowA = unique(sA,'rows'); % Finding replicates. 
+rowA = rowA([1 2 3 4],:); % idx = 29:[1 2 3 4] random [2 3 1 4]
+figure(27), imagesc(rowA), title('Fisher unique')
       
 imA = [col(4)*repmat(rowA(1,:),25,1); col(3)*repmat(rowA(2,:),25,1);...
        col(2)*repmat(rowA(3,:),25,1); col(1)*repmat(rowA(4,:),25,1)];
    
-imA = [imA zeros(100,4*rep)];
+imA = [imA zeros(100,rep)];
 imA = ones(size(imA))*0.1 + imA;
 
 imZclust = ones(size(imZclust))*0.1 + imZclust;
@@ -108,8 +120,13 @@ figure(30), imagesc([imA; 0.6*sX imZclust]), colormap(jet(64))
 xticks(ticks)
 xticklabels(ticklabels)
 xtickangle(90)
+ax = gca;
+ax.TickLength = [.001, .001];
+  
+
+
 title('P3CL 1% filtering')
-xlabel('Fisher hypothesis tests, p-value = 0.05, rejecting 13224 H0`s (93.3%)')
+xlabel('Fisher hypothesis tests, p-value = 0.05, rejecting 13224 H0`s (93.2%)')
 
 
 
